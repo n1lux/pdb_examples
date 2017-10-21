@@ -15,16 +15,26 @@ def machine_info():
         return json.dumps(info)
 
 
-def main():
+def load_machine_conf():
+
     machine = json.loads(machine_info())
+    
+    data = dict()
+    
+    data['version'] = machine['version']
+    data['os_version'] = machine['os']
+    
+    return data
+
+def main():
+
     try:
-        print(machine['os'])
+        load_machine_conf()
     except:
         import pdb, traceback, sys
         _, _, tb = sys.exc_info()
         traceback.print_exc()
         pdb.post_mortem(tb)
-
 
 
 if __name__ == "__main__":
